@@ -1,0 +1,354 @@
+<input type="text" id="0,0" value="6">
+<input type="text" id="0,1" value="7">
+<input type="text" id="0,2" value="2"><br/>
+<input type="text" id="1,0" value="5">
+<input type="text" id="1,1" value="3">
+<input type="text" id="1,2" value="4"><br/>
+<input type="text" id="2,0" value="1">
+<input type="text" id="2,1" value="8">
+<input type="text" id="2,2" value="9"><br/>
+
+<button onclick="pretzel()">click to solve pretzel</button>
+
+<p id="result"></p>
+
+<script>
+  
+  var res = document.getElementById("result");
+  var min = -12;
+  var max = 36;
+  var S = Array(max-min+1);
+    
+  function pretzel(){
+    
+	var r0c0 = parseInt(document.getElementById("0,0").value);
+    var r0c1 = parseInt(document.getElementById("0,1").value);
+    var r0c2 = parseInt(document.getElementById("0,2").value);
+    var r1c0 = parseInt(document.getElementById("1,0").value);
+    var r1c1 = parseInt(document.getElementById("1,1").value);
+    var r1c2 = parseInt(document.getElementById("1,2").value);
+    var r2c0 = parseInt(document.getElementById("2,0").value);
+    var r2c1 = parseInt(document.getElementById("2,1").value);
+    var r2c2 = parseInt(document.getElementById("2,2").value);   
+       
+    go(r0c0,r0c1,r0c2);
+    go(r1c0,r1c1,r1c2);
+    go(r2c0,r2c1,r2c2);
+    go(r0c0,r1c0,r2c0);
+    go(r0c1,r1c1,r2c1);
+    go(r0c2,r1c2,r2c2);
+    go(r0c0,r1c1,r2c2);
+    go(r0c2,r1c1,r2c0);
+    
+    res.innerHTML="";
+    
+    for (let i=0;i<(max-min+1);i++){
+  		res.innerHTML += S[i]+"<br>";
+		} 
+    
+  }
+  
+  function go(A,B,C){
+    //+-
+    temp=A+B+C;
+    if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"+"+B+"+"+C+"="+temp;
+    }
+    temp=A+B-C;
+    if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"+"+B+"-"+C+"="+temp;
+    }
+    temp=A-B+C;
+    if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"-"+B+"+"+C+"="+temp;
+    }
+    temp=A-B-C;
+    if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"-"+B+"-"+C+"="+temp;
+    }
+    temp=B+C-A;
+    if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"+"+C+"-"+A+"="+temp;
+    }
+    temp=B-C-A;
+    if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"-"+C+"-"+A+"="+temp;
+    }
+    temp=C-B-A;
+    if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"-"+B+"-"+A+"="+temp;
+    }
+    temp=C+B-A;
+    if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"+"+B+"-"+A+"="+temp;
+    }
+	//+*
+	temp=A*B*C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+B+"*"+C+"="+temp;
+    }
+	temp=A+B*C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"+"+B+"*"+C+"="+temp;
+    }
+	temp=A*B+C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+B+"*"+C+"="+temp;
+    }
+	temp=(A+B)*C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]="("+A+"+"+B+")"+C+"="+temp;
+    }
+	temp=A*(B+C);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+"("+B+"+"+C+")"+"="+temp;
+    }
+	temp=B+A*C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"+"+A+"*"+C+"="+temp;
+    }
+	temp=B*(A+C);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"*"+"("+A+"+"+C+")"+"="+temp;
+    }
+	
+	//-*
+	temp=A-B*C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"-"+B+"*"+C+"="+temp;
+    }
+	temp=A*B-C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+B+"-"+C+"="+temp;
+    }
+	temp=(A-B)*C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]="("+A+"-"+B+")"+"*"+C+"="+temp;
+    }
+	temp=A*(B-C);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+"("+B+"-"+C+")"+"="+temp;
+    }
+	temp=A*C-B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+C+"-"+B+"="+temp;
+    }
+	temp=(A-C)*B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]="("+A+"-"+C+")"+"*"+B+"="+temp;
+    }
+	temp=A*(C-B);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+"("+C+"-"+B+")"+"="+temp;
+    }
+	temp=B-A*C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"-"+A+"*"+C+"="+temp;
+    }
+	temp=B*A-C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"*"+A+"-"+C+"="+temp;
+    }
+	temp=(B-A)*C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]="("+B+"-"+A+")"+"*"+C+"="+temp;
+    }
+	temp=B*(A-C);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"*"+"("+A+"-"+C+")"+"="+temp;
+    }
+	temp=B*C-A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"*"+C+"-"+A+"="+temp;
+    }
+	temp=(B-C)*A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]="("+B+"-"+C+")"+"*"+A+"="+temp;
+    }
+	temp=B*(C-A);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"*"+"("+C+"-"+A+")"+"="+temp;
+    }
+	temp=C-B*A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"-"+B+"*"+A+"="+temp;
+    }
+	temp=C*B-A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"*"+B+"-"+A+"="+temp;
+    }
+	temp=(C-B)*A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]="("+C+"-"+B+")"+"*"+A+"="+temp;
+    }
+	temp=C*(B-A);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"*"+"("+B+"-"+A+")"+"="+temp;
+    }
+	temp=C*A-B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"*"+A+"-"+B+"="+temp;
+    }
+	temp=(C-A)*B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]="("+C+"-"+A+")"+"*"+B+"="+temp;
+    }
+	temp=C*(A-B);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"*"+"("+A+"-"+B+")"+"="+temp;
+    }
+	
+	//+/
+	temp=A+B/C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"+"+B+"/"+C+"="+temp;
+    }
+	temp=A+C/B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"+"+C+"/"+B+"="+temp;
+    }
+	temp=B+C/A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"+"+C+"/"+A+"="+temp;
+    }
+	temp=B+A/C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"+"+A+"/"+C+"="+temp;
+    }
+	temp=C+A/B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"+"+A+"/"+B+"="+temp;
+    }
+	temp=C+B/A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"+"+B+"/"+A+"="+temp;
+    }
+	temp=C/(A+B);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"/"+"("+A+"+"+B+")"+"="+temp;
+    }
+	temp=B/(A+C);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"/"+"("+A+"+"+C+")"+"="+temp;
+    }
+	temp=A/(B+C);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"/"+"("+B+"+"+C+")"+"="+temp;
+    }
+	temp=C/(B+A);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"/"+"("+B+"+"+A+")"+"="+temp;
+    }
+	temp=B/(C+A);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"/"+"("+C+"+"+A+")"+"="+temp;
+    }
+	temp=A/(C+B);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"/"+"("+C+"+"+B+")"+"="+temp;
+    }
+	
+	//-/
+	temp=A-B/C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"-"+B+"/"+C+"="+temp;
+    }
+	temp=A-C/B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"-"+C+"/"+B+"="+temp;
+    }
+	temp=B-C/A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"-"+C+"/"+A+"="+temp;
+    }
+	temp=B-A/C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"-"+A+"/"+C+"="+temp;
+    }
+	temp=C-A/B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"-"+A+"/"+B+"="+temp;
+    }
+	temp=C-B/A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"-"+B+"/"+A+"="+temp;
+    }
+	temp=A/B-C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"/"+B+"-"+C+"="+temp;
+    }
+	temp=A/C-B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"/"+C+"-"+B+"="+temp;
+    }
+	temp=B/C-A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"/"+C+"-"+A+"="+temp;
+    }
+	temp=B/A-C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"/"+A+"-"+C+"="+temp;
+    }
+	temp=C/A-B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"/"+A+"-"+B+"="+temp;
+    }
+	temp=C/B-A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"/"+B+"-"+A+"="+temp;
+    }
+	temp=C/(A-B);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"/"+"("+A+"-"+B+")"+"="+temp;
+    }
+	temp=B/(A-C);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"/"+"("+A+"-"+C+")"+"="+temp;
+    }
+	temp=A/(B-C);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"/"+"("+B+"-"+C+")"+"="+temp;
+    }
+	temp=C/(B-A);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"/"+"("+B+"-"+A+")"+"="+temp;
+    }
+	temp=B/(C-A);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"/"+"("+C+"-"+A+")"+"="+temp;
+    }
+	temp=A/(C-B);
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"/"+"("+C+"-"+B+")"+"="+temp;
+    }
+	
+	//*/
+	temp=A*B/C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+B+"/"+C+"="+temp;
+    }
+	temp=A*C/B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"*"+C+"/"+B+"="+temp;
+    }
+	temp=B*C/A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"*"+C+"/"+A+"="+temp;
+    }
+	
+	////
+	temp=A/B/C;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=A+"/"+B+"/"+C+"="+temp;
+    }
+	temp=B/C/A;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=B+"/"+C+"/"+A+"="+temp;
+    }
+	temp=C/A/B;
+	if ((temp>=min) && (temp<=max)){
+      S[temp-min]=C+"/"+A+"/"+B+"="+temp;
+    }
+  }
+  
+</script>
