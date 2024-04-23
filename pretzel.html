@@ -93,11 +93,11 @@
     }
 	temp=A*B+C;
 	if ((temp>=min) && (temp<=max)){
-      S[temp-min]=A+"*"+B+"*"+C+"="+temp;
+      S[temp-min]=A+"*"+B+"+"+C+"="+temp;
     }
 	temp=(A+B)*C;
 	if ((temp>=min) && (temp<=max)){
-      S[temp-min]="("+A+"+"+B+")"+C+"="+temp;
+      S[temp-min]="("+A+"+"+B+")"+"*"+C+"="+temp;
     }
 	temp=A*(B+C);
 	if ((temp>=min) && (temp<=max)){
